@@ -18,7 +18,6 @@ class CreateUserDto extends createZodDto(createUserSchema) {}
 class UpdateUserDto extends createZodDto(updateUserSchema) {}
 
 // Generate OpenAPI schemas from Zod schemas
-// Using 'as any' to avoid TypeScript errors with ExtendedSchemaObject
 const createUserOpenApi: SchemaObject = zodToOpenAPI(createUserSchema);
 const updateUserOpenApi: SchemaObject = zodToOpenAPI(updateUserSchema);
 

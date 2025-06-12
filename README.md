@@ -95,7 +95,12 @@ $ pnpm start
 ```bash
 # unit tests
 $ pnpm test
+
+# e2e tests
+$ pnpm test -- --config ./test/jest-e2e.json
 ```
+
+For more detailed information about testing, see the [test README](./test/README.md).
 
 ## Project Features
 

@@ -1,12 +1,12 @@
-import { drizzle } from 'drizzle-orm/node-postgres';
+import { drizzle, NodePgDatabase } from 'drizzle-orm/node-postgres';
 import { Pool } from 'pg';
 import * as schema from './schema';
 
-let pool;
-let db;
+let pool: Pool;
+let db: NodePgDatabase<typeof schema>;
 
 try {
-  // Create a PostgreSQL connection pool
+  // Create a PostgresSQL connection pool
   pool = new Pool({
     connectionString:
       process.env.DATABASE_URL ||

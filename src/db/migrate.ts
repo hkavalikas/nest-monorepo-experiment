@@ -6,9 +6,9 @@ import { Pool } from 'pg';
 async function main() {
   console.log('Running migrations...');
 
-  let pool;
+  let pool: Pool;
   try {
-    // Create a PostgreSQL connection pool
+    // Create a PostgresSQL connection pool
     pool = new Pool({
       connectionString:
         process.env.DATABASE_URL ||
@@ -29,6 +29,7 @@ async function main() {
     console.error(error);
 
     // Try to close the pool if it exists
+    // @ts-expect-error - pool might not be defined if the connection failed
     if (pool) {
       await pool.end().catch(console.error);
     }

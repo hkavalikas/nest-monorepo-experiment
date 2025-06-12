@@ -1,15 +1,13 @@
-import { Injectable, Inject, NotFoundException } from '@nestjs/common';
-import { DB_TOKEN } from '../db/db.module';
-import { NodePgDatabase } from 'drizzle-orm/node-postgres';
-import { users, User } from '../db/schema';
+import { Injectable, Inject } from '@nestjs/common';
+import { User } from '../db/schema';
 import { CreateUserDto, UpdateUserDto } from '../validation/user.schema';
-import { eq } from 'drizzle-orm';
+import { UsersRepository } from './repositories/users.repository.interface';
 
 @Injectable()
 export class UsersService {
   constructor(
-    @Inject(DB_TOKEN)
-    private db: NodePgDatabase<typeof import('../db/schema')>,
+    @Inject('USERS_REPOSITORY')
+    private usersRepository: UsersRepository,
   ) {}
 
   /**
@@ -18,17 +16,7 @@ export class UsersService {
    * @returns The created user
    */
   async create(createUserDto: CreateUserDto): Promise<User> {
-    try {
-      const [user] = await this.db
-        .insert(users)
-        .values(createUserDto)
-        .returning();
-      return user;
-    } catch (error: unknown) {
-      throw new Error(
-        `Failed to create user: ${error instanceof Error ? error.message : String(error)}`,
-      );
-    }
+    return this.usersRepository.create(createUserDto);
   }
 
   /**
@@ -36,13 +24,7 @@ export class UsersService {
    * @returns Array of all users
    */
   async findAll(): Promise<User[]> {
-    try {
-      return await this.db.select().from(users);
-    } catch (error: unknown) {
-      throw new Error(
-        `Failed to find users: ${error instanceof Error ? error.message : String(error)}`,
-      );
-    }
+    return this.usersRepository.findAll();
   }
 
   /**
@@ -52,20 +34,7 @@ export class UsersService {
    * @throws NotFoundException if user not found
    */
   async findOne(id: string): Promise<User> {
-    try {
-      const [user] = await this.db.select().from(users).where(eq(users.id, id));
-      if (!user) {
-        throw new NotFoundException(`User with ID ${id} not found`);
-      }
-      return user;
-    } catch (error: unknown) {
-      if (error instanceof NotFoundException) {
-        throw error;
-      }
-      throw new Error(
-        `Failed to find user: ${error instanceof Error ? error.message : String(error)}`,
-      );
-    }
+    return this.usersRepository.findOne(id);
   }
 
   /**
@@ -76,26 +45,7 @@ export class UsersService {
    * @throws NotFoundException if user not found
    */
   async update(id: string, updateUserDto: UpdateUserDto): Promise<User> {
-    try {
-      const [user] = await this.db
-        .update(users)
-        .set(updateUserDto)
-        .where(eq(users.id, id))
-        .returning();
-
-      if (!user) {
-        throw new NotFoundException(`User with ID ${id} not found`);
-      }
-
-      return user;
-    } catch (error: unknown) {
-      if (error instanceof NotFoundException) {
-        throw error;
-      }
-      throw new Error(
-        `Failed to update user: ${error instanceof Error ? error.message : String(error)}`,
-      );
-    }
+    return this.usersRepository.update(id, updateUserDto);
   }
 
   /**
@@ -105,24 +55,6 @@ export class UsersService {
    * @throws NotFoundException if user not found
    */
   async remove(id: string): Promise<User> {
-    try {
-      const [user] = await this.db
-        .delete(users)
-        .where(eq(users.id, id))
-        .returning();
-
-      if (!user) {
-        throw new NotFoundException(`User with ID ${id} not found`);
-      }
-
-      return user;
-    } catch (error: unknown) {
-      if (error instanceof NotFoundException) {
-        throw error;
-      }
-      throw new Error(
-        `Failed to remove user: ${error instanceof Error ? error.message : String(error)}`,
-      );
-    }
+    return this.usersRepository.remove(id);
   }
 }

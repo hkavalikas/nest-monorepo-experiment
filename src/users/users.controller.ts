@@ -1,15 +1,19 @@
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  Patch,
-  Param,
+  Controller,
   Delete,
+  Get,
   Inject,
+  Param,
+  Patch,
+  Post,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { CreateUserDto, UpdateUserDto } from '../validation/user.schema';
+import {
+  CreateUserDto,
+  createUserSchema,
+  UpdateUserDto,
+} from '../validation/user.schema';
 
 @Controller('users')
 export class UsersController {
@@ -19,6 +23,8 @@ export class UsersController {
 
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
+    createUserSchema.parse(createUserDto);
+
     return this.usersService.create(createUserDto);
   }
 

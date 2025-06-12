@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { UsersController } from './users.controller';
-import { UsersService } from './users.service';
-import { CreateUserDto, UpdateUserDto } from '../validation/user.schema';
+import { UsersController } from '../../users/users.controller';
+import { UsersService } from '../../users/users.service';
+import { CreateUserDto, UpdateUserDto } from '../../validation/user.schema';
 
 describe('UsersController', () => {
   let controller: UsersController;
@@ -57,8 +57,9 @@ describe('UsersController', () => {
       const result = await controller.create(createUserDto);
 
       expect(result).toEqual(expectedResult);
-      expect(service.create).toHaveBeenCalledWith(createUserDto);
-      expect(service.create).toHaveBeenCalledTimes(1);
+      // Fix ESLint unbound-method issues by using arrow functions
+      expect(mockUsersService.create).toHaveBeenCalledWith(createUserDto);
+      expect(mockUsersService.create).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -88,7 +89,7 @@ describe('UsersController', () => {
       const result = await controller.findAll();
 
       expect(result).toEqual(expectedResult);
-      expect(service.findAll).toHaveBeenCalledTimes(1);
+      expect(mockUsersService.findAll).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -109,8 +110,8 @@ describe('UsersController', () => {
       const result = await controller.findOne(userId);
 
       expect(result).toEqual(expectedResult);
-      expect(service.findOne).toHaveBeenCalledWith(userId);
-      expect(service.findOne).toHaveBeenCalledTimes(1);
+      expect(mockUsersService.findOne).toHaveBeenCalledWith(userId);
+      expect(mockUsersService.findOne).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -134,8 +135,11 @@ describe('UsersController', () => {
       const result = await controller.update(userId, updateUserDto);
 
       expect(result).toEqual(expectedResult);
-      expect(service.update).toHaveBeenCalledWith(userId, updateUserDto);
-      expect(service.update).toHaveBeenCalledTimes(1);
+      expect(mockUsersService.update).toHaveBeenCalledWith(
+        userId,
+        updateUserDto,
+      );
+      expect(mockUsersService.update).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -156,8 +160,8 @@ describe('UsersController', () => {
       const result = await controller.remove(userId);
 
       expect(result).toEqual(expectedResult);
-      expect(service.remove).toHaveBeenCalledWith(userId);
-      expect(service.remove).toHaveBeenCalledTimes(1);
+      expect(mockUsersService.remove).toHaveBeenCalledWith(userId);
+      expect(mockUsersService.remove).toHaveBeenCalledTimes(1);
     });
   });
 });

@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { UsersService } from './users.service';
-import { CreateUserDto, UpdateUserDto } from '../validation/user.schema';
+import { UsersService } from '../../users/users.service';
+import { CreateUserDto, UpdateUserDto } from '../../validation/user.schema';
 import { NotFoundException } from '@nestjs/common';
 
 describe('UsersService', () => {
@@ -55,8 +55,10 @@ describe('UsersService', () => {
       const result = await service.create(createUserDto);
 
       expect(result).toEqual(expectedResult);
-      expect(mockUsersRepository.create).toHaveBeenCalledWith(createUserDto);
-      expect(mockUsersRepository.create).toHaveBeenCalledTimes(1);
+      // Fix ESLint unbound-method issues
+      const createFn = mockUsersRepository.create;
+      expect(createFn).toHaveBeenCalledWith(createUserDto);
+      expect(createFn).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -86,7 +88,8 @@ describe('UsersService', () => {
       const result = await service.findAll();
 
       expect(result).toEqual(expectedResult);
-      expect(mockUsersRepository.findAll).toHaveBeenCalledTimes(1);
+      const findAllFn = mockUsersRepository.findAll;
+      expect(findAllFn).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -107,8 +110,9 @@ describe('UsersService', () => {
       const result = await service.findOne(userId);
 
       expect(result).toEqual(expectedResult);
-      expect(mockUsersRepository.findOne).toHaveBeenCalledWith(userId);
-      expect(mockUsersRepository.findOne).toHaveBeenCalledTimes(1);
+      const findOneFn = mockUsersRepository.findOne;
+      expect(findOneFn).toHaveBeenCalledWith(userId);
+      expect(findOneFn).toHaveBeenCalledTimes(1);
     });
 
     it('should propagate NotFoundException if user is not found', async () => {
@@ -121,8 +125,9 @@ describe('UsersService', () => {
 
       await expect(service.findOne(userId)).rejects.toThrow(NotFoundException);
       await expect(service.findOne(userId)).rejects.toThrow(errorMessage);
-      expect(mockUsersRepository.findOne).toHaveBeenCalledWith(userId);
-      expect(mockUsersRepository.findOne).toHaveBeenCalledTimes(2);
+      const findOneFn = mockUsersRepository.findOne;
+      expect(findOneFn).toHaveBeenCalledWith(userId);
+      expect(findOneFn).toHaveBeenCalledTimes(2);
     });
   });
 
@@ -146,11 +151,9 @@ describe('UsersService', () => {
       const result = await service.update(userId, updateUserDto);
 
       expect(result).toEqual(expectedResult);
-      expect(mockUsersRepository.update).toHaveBeenCalledWith(
-        userId,
-        updateUserDto,
-      );
-      expect(mockUsersRepository.update).toHaveBeenCalledTimes(1);
+      const updateFn = mockUsersRepository.update;
+      expect(updateFn).toHaveBeenCalledWith(userId, updateUserDto);
+      expect(updateFn).toHaveBeenCalledTimes(1);
     });
 
     it('should propagate NotFoundException if user is not found', async () => {
@@ -170,11 +173,9 @@ describe('UsersService', () => {
       await expect(service.update(userId, updateUserDto)).rejects.toThrow(
         errorMessage,
       );
-      expect(mockUsersRepository.update).toHaveBeenCalledWith(
-        userId,
-        updateUserDto,
-      );
-      expect(mockUsersRepository.update).toHaveBeenCalledTimes(2);
+      const updateFn = mockUsersRepository.update;
+      expect(updateFn).toHaveBeenCalledWith(userId, updateUserDto);
+      expect(updateFn).toHaveBeenCalledTimes(2);
     });
   });
 
@@ -195,8 +196,9 @@ describe('UsersService', () => {
       const result = await service.remove(userId);
 
       expect(result).toEqual(expectedResult);
-      expect(mockUsersRepository.remove).toHaveBeenCalledWith(userId);
-      expect(mockUsersRepository.remove).toHaveBeenCalledTimes(1);
+      const removeFn = mockUsersRepository.remove;
+      expect(removeFn).toHaveBeenCalledWith(userId);
+      expect(removeFn).toHaveBeenCalledTimes(1);
     });
 
     it('should propagate NotFoundException if user is not found', async () => {
@@ -209,8 +211,9 @@ describe('UsersService', () => {
 
       await expect(service.remove(userId)).rejects.toThrow(NotFoundException);
       await expect(service.remove(userId)).rejects.toThrow(errorMessage);
-      expect(mockUsersRepository.remove).toHaveBeenCalledWith(userId);
-      expect(mockUsersRepository.remove).toHaveBeenCalledTimes(2);
+      const removeFn = mockUsersRepository.remove;
+      expect(removeFn).toHaveBeenCalledWith(userId);
+      expect(removeFn).toHaveBeenCalledTimes(2);
     });
   });
 });

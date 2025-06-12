@@ -93,14 +93,21 @@ $ pnpm start
 ## Run tests
 
 ```bash
-# unit tests
+# run all tests (unit and e2e) with turbo for faster execution
 $ pnpm test
 
-# e2e tests
-$ pnpm test -- --config ./test/jest-e2e.json
+# run only unit tests
+$ pnpm test:unit
+
+# run only e2e tests
+$ pnpm test:e2e
 ```
 
-For more detailed information about testing, see the [test README](./test/README.md).
+All tests are now located in the `src/tests` directory:
+- Unit tests: `src/tests/unit/*.spec.ts`
+- Integration tests: `src/tests/integration/*.e2e-spec.ts`
+
+The tests use turbo for faster execution with caching.
 
 ## Project Features
 

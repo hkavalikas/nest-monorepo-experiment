@@ -35,7 +35,9 @@ export class AllExceptionsFilter implements ExceptionFilter {
       // Convert ZodError to our custom ZodValidationException
       const zodValidationException = new ZodValidationException(exception);
       const exceptionResponse = zodValidationException.getResponse();
-      response.status(zodValidationException.getStatus()).json(exceptionResponse);
+      response
+        .status(zodValidationException.getStatus())
+        .json(exceptionResponse);
     } else if (exception instanceof DatabaseException) {
       // Database exceptions already have the format we want
       const exceptionResponse = exception.getResponse();

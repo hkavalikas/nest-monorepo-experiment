@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { AppModule } from '../src/app.module';
-import { UsersRepository } from '../src/users/repositories/users.repository.interface';
+import { AppModule } from '../../app.module';
+import { UsersRepository } from '../../users/repositories/users.repository.interface';
 
 describe('UsersController (e2e)', () => {
   let app: INestApplication;
@@ -76,9 +76,9 @@ describe('UsersController (e2e)', () => {
           expect(res.body).toHaveProperty('id');
           expect(res.body.name).toBe(createUserDto.name);
           expect(res.body.email).toBe(createUserDto.email);
-          expect(mockUsersRepository.create).toHaveBeenCalledWith(
-            createUserDto,
-          );
+          // Fix ESLint unbound-method issues
+          const createFn = mockUsersRepository.create;
+          expect(createFn).toHaveBeenCalledWith(createUserDto);
         });
     });
 
@@ -105,7 +105,8 @@ describe('UsersController (e2e)', () => {
           expect(Array.isArray(res.body)).toBe(true);
           expect(res.body.length).toBeGreaterThan(0);
           expect(res.body[0]).toHaveProperty('id');
-          expect(mockUsersRepository.findAll).toHaveBeenCalled();
+          const findAllFn = mockUsersRepository.findAll;
+          expect(findAllFn).toHaveBeenCalled();
         });
     });
   });
@@ -118,7 +119,8 @@ describe('UsersController (e2e)', () => {
         .expect((res) => {
           expect(res.body).toHaveProperty('id', 'test-uuid');
           expect(res.body.name).toBe(testUser.name);
-          expect(mockUsersRepository.findOne).toHaveBeenCalledWith('test-uuid');
+          const findOneFn = mockUsersRepository.findOne;
+          expect(findOneFn).toHaveBeenCalledWith('test-uuid');
         });
     });
 
@@ -142,10 +144,8 @@ describe('UsersController (e2e)', () => {
         .expect((res) => {
           expect(res.body).toHaveProperty('id', 'test-uuid');
           expect(res.body.name).toBe(updateUserDto.name);
-          expect(mockUsersRepository.update).toHaveBeenCalledWith(
-            'test-uuid',
-            updateUserDto,
-          );
+          const updateFn = mockUsersRepository.update;
+          expect(updateFn).toHaveBeenCalledWith('test-uuid', updateUserDto);
         });
     });
 
@@ -175,7 +175,8 @@ describe('UsersController (e2e)', () => {
         .expect(200)
         .expect((res) => {
           expect(res.body).toHaveProperty('id', 'test-uuid');
-          expect(mockUsersRepository.remove).toHaveBeenCalledWith('test-uuid');
+          const removeFn = mockUsersRepository.remove;
+          expect(removeFn).toHaveBeenCalledWith('test-uuid');
         });
     });
 

@@ -9,11 +9,8 @@ import {
   Post,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
-import {
-  CreateUserDto,
-  createUserSchema,
-  UpdateUserDto,
-} from '../validation/user.schema';
+import { CreateUserDto, UpdateUserDto } from '../validation/user.schema';
+import { ApiBody, ApiParam } from '@nestjs/swagger';
 
 @Controller('users')
 export class UsersController {
@@ -22,10 +19,9 @@ export class UsersController {
   ) {}
 
   @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    createUserSchema.parse(createUserDto);
-
-    return this.usersService.create(createUserDto);
+  @ApiBody({ type: CreateUserDto })
+  create(@Body() dto: CreateUserDto) {
+    return this.usersService.create(dto);
   }
 
   @Get()
@@ -34,6 +30,7 @@ export class UsersController {
   }
 
   @Get(':id')
+  @ApiParam({ name: 'id', type: String, description: 'User ID' })
   findOne(@Param('id') id: string) {
     return this.usersService.findOne(id);
   }

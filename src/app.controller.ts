@@ -11,6 +11,7 @@ export class AppController {
   @ApiOperation({ summary: 'Get a greeting message' })
   @ApiResponse({ status: 200, description: 'Returns the greeting message' })
   getHello(): string {
+    console.log(process.env.DATABASE_URL);
     return this.appService.getHello();
   }
 }

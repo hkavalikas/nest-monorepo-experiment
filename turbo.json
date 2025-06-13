@@ -1,5 +1,7 @@
 {
-  "extends": ["//"],
+  "extends": [
+    "//"
+  ],
   "$schema": "https://turbo.build/schema.json",
   "tasks": {
     "dev": {
@@ -13,64 +15,108 @@
     },
     "build": {
       "cache": true,
-      "dependsOn": ["^build"],
-      "outputs": ["dist/**"]
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        "dist/**"
+      ]
     },
     "build:app": {
-        "cache": true,
-       "dependsOn": ["^build"],
-        "outputs": ["dist/**"]
-      },
+      "cache": true,
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        "dist/**"
+      ]
+    },
     "lint": {
       "cache": true,
-      "dependsOn": ["^lint"],
-      "inputs": ["src/**/*.ts", "!src/tests/**/*.ts", "eslint.config.mjs"],
+      "dependsOn": [
+        "^lint"
+      ],
+      "inputs": [
+        "src/**/*.ts",
+        "!src/tests/**/*.ts",
+        "eslint.config.mjs"
+      ],
       "outputs": []
     },
     "lint:run": {
       "cache": true,
-      "inputs": ["src/**/*.ts", "!src/tests/**/*.ts", "eslint.config.mjs"],
+      "inputs": [
+        "src/**/*.ts",
+        "!src/tests/**/*.ts",
+        "eslint.config.mjs"
+      ],
       "outputs": []
     },
     "format": {
       "cache": true,
-      "inputs": ["src/**/*.ts"],
+      "inputs": [
+        "src/**/*.ts"
+      ],
       "outputs": []
     },
     "format:run": {
       "cache": true,
-      "inputs": ["src/**/*.ts"],
+      "inputs": [
+        "src/**/*.ts"
+      ],
       "outputs": []
-    },
-    "check": {
-      "cache": true
     },
     "test": {
       "cache": true,
-      "dependsOn": ["build"],
-      "inputs": ["src/**/*.ts", "jest.config.js"],
-      "outputs": ["coverage/**"]
+      "dependsOn": [
+        "build"
+      ],
+      "inputs": [
+        "src/**/*.ts",
+        "jest.config.js"
+      ],
+      "outputs": [
+        "coverage/**"
+      ]
     },
     "test:unit": {
       "cache": true,
-      "dependsOn": ["build"],
-      "inputs": ["src/**/*.ts", "src/tests/unit/**/*.ts"],
+      "dependsOn": [
+        "build"
+      ],
+      "inputs": [
+        "src/**/*.ts",
+        "src/tests/unit/**/*.ts"
+      ],
       "outputs": []
     },
     "test:unit:run": {
       "cache": true,
-      "inputs": ["src/**/*.ts", "src/tests/unit/**/*.ts"],
+      "inputs": [
+        "src/**/*.ts",
+        "src/tests/unit/**/*.ts"
+      ],
       "outputs": []
     },
     "test:e2e": {
       "cache": true,
-      "dependsOn": ["build"],
-      "inputs": ["src/**/*.ts", "src/tests/jest-e2e.json", "src/tests/e2e/**/*.ts"],
+      "dependsOn": [
+        "build"
+      ],
+      "inputs": [
+        "src/**/*.ts",
+        "src/tests/jest-e2e.json",
+        "src/tests/e2e/**/*.ts"
+      ],
       "outputs": []
     },
     "test:e2e:run": {
       "cache": true,
-      "inputs": ["src/**/*.ts", "src/tests/jest-e2e.json", "src/tests/e2e/**/*.ts"],
+      "inputs": [
+        "src/**/*.ts",
+        "src/tests/jest-e2e.json",
+        "src/tests/e2e/**/*.ts"
+      ],
       "outputs": []
     }
   }

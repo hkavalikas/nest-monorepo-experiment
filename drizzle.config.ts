@@ -1,9 +1,9 @@
 import type { Config } from 'drizzle-kit';
-import configuration from '@src/config/configuration';
+import configuration from '@common/db/configuration';
 
 export default {
-  schema: './src/db/schema.ts',
-  out: './drizzle',
+  schema: './common/src/db/schema.ts',
+  out: './common/src/db/drizzle',
   dialect: 'postgresql',
   dbCredentials: {
     url: configuration().databaseUrl,

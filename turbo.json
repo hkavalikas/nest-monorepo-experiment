@@ -37,8 +37,9 @@
         "^lint"
       ],
       "inputs": [
+        "client/src/**/*.ts",
+        "common/**/*.ts",
         "src/**/*.ts",
-        "!src/tests/**/*.ts",
         "eslint.config.mjs"
       ],
       "outputs": []
@@ -46,8 +47,9 @@
     "lint:run": {
       "cache": true,
       "inputs": [
+        "client/src/**/*.ts",
+        "common/**/*.ts",
         "src/**/*.ts",
-        "!src/tests/**/*.ts",
         "eslint.config.mjs"
       ],
       "outputs": []
@@ -72,6 +74,8 @@
         "build"
       ],
       "inputs": [
+        "client/src/**/*.ts",
+        "common/**/*.ts",
         "src/**/*.ts",
         "jest.config.json"
       ],
@@ -85,7 +89,10 @@
         "build"
       ],
       "inputs": [
+        "client/src/**/*.ts",
+        "common/**/*.ts",
         "src/**/*.ts",
+        "client/src/tests/unit/**/*.ts",
         "src/tests/unit/**/*.ts"
       ],
       "outputs": []
@@ -93,7 +100,10 @@
     "test:unit:run": {
       "cache": true,
       "inputs": [
+        "client/src/**/*.ts",
+        "common/**/*.ts",
         "src/**/*.ts",
+        "client/src/tests/unit/**/*.ts",
         "src/tests/unit/**/*.ts"
       ],
       "outputs": []

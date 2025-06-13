@@ -14,15 +14,15 @@
     "test": "dotenv -- turbo run test:unit:run",
     "test:unit": "dotenv -- turbo run test:unit:run",
     "test:e2e": "dotenv -- turbo run test:e2e:run",
-    "build:app": "dotenv -- esbuild src/main.ts --bundle --platform=node --outfile=dist/main.js --sourcemap --sources-content=true --external:@nestjs/microservices --external:@nestjs/websockets --external:@nestjs/microservices/microservices-module --external:cache-manager --external:class-transformer --external:class-validator --external:@nestjs/microservices/microservices-module",
+    "build:app": "dotenv -- esbuild client/src/main.ts --bundle --platform=node --outfile=dist/main.js --sourcemap --sources-content=true --external:@nestjs/microservices --external:@nestjs/websockets --external:@nestjs/microservices/microservices-module --external:cache-manager --external:class-transformer --external:class-validator --external:@nestjs/microservices/microservices-module",
     "format:run": "dotenv -- prettier --write \"src/**/*.ts\"",
     "lint:run": "dotenv -- eslint \"{src,apps,libs}/**/*.ts\" --fix",
     "start": "dotenv -- node --enable-source-maps dist/main.js",
-    "dev:run": "dotenv -- tsx watch src/main.ts",
+    "dev:run": "dotenv -- tsx watch client/src/main.ts",
     "test:unit:run": "dotenv -- jest --config ./jest.config.json",
-    "test:e2e:run": "dotenv -- jest --config ./src/tests/jest-e2e.json",
+    "test:e2e:run": "dotenv -- jest --config tests/jest-e2e.json",
     "db:generate": "dotenv -- drizzle-kit generate",
-    "db:migrate": "dotenv -- tsx src/db/migrate.ts",
+    "db:migrate": "dotenv -- tsx common/src/db/migrate.ts",
     "prepare": "husky"
   },
   "dependencies": {
@@ -85,5 +85,9 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
-  }
+  },
+  "workspaces": [
+    "client",
+    "common"
+  ]
 }

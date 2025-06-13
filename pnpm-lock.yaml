@@ -130,6 +130,10 @@ importers:
         specifier: ^8.20.0
         version: 8.20.0(eslint@9.18.0)(typescript@5.7.3)
 
+  client: {}
+
+  common: {}
+
 packages:
 
   /@ampproject/remapping@2.3.0:

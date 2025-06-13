@@ -11,8 +11,11 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "paths": {
-      "@src/*": [
-        "src/*"
+      "@client/*": [
+        "client/src/*"
+      ],
+      "@common/*": [
+        "common/src/*"
       ]
     },
     "incremental": true,

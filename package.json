@@ -22,7 +22,8 @@
     "test:unit:run": "dotenv -- jest",
     "test:e2e:run": "dotenv -- jest --config ./src/tests/jest-e2e.json",
     "db:generate": "dotenv -- drizzle-kit generate",
-    "db:migrate": "dotenv -- tsx src/db/migrate.ts"
+    "db:migrate": "dotenv -- tsx src/db/migrate.ts",
+    "prepare": "husky"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",

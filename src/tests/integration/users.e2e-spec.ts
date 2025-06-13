@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication, NotFoundException } from '@nestjs/common';
 import * as request from 'supertest';
-import { AppModule } from '../../app.module';
-import { UsersRepository } from '../../users/repositories/users.repository.interface';
+import { AppModule } from '@src/app.module';
+import { UsersRepository } from '@src/users/repositories/users.repository.interface';
 import { ZodValidationPipe } from 'nestjs-zod';
 
 describe('UsersController (e2e)', () => {

@@ -8,13 +8,13 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { UsersService } from './users.service';
+import { UsersService } from '@src/users/users.service';
 import {
   CreateUserDto,
   createUserOpenApi,
   UpdateUserDto,
   updateUserOpenApi,
-} from '../validation/user.schema';
+} from '@src/validation/user.schema';
 import { ApiBody, ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
 
 @Controller('users')

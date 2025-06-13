@@ -1,11 +1,11 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { DB_TOKEN } from '../../db/db.module';
+import { DB_TOKEN } from '@src/db/db.module';
 import { NodePgDatabase } from 'drizzle-orm/node-postgres';
-import { User, users } from '../../db';
-import { CreateUserDto, UpdateUserDto } from '../../validation/user.schema';
+import { User, users } from '@src/db';
+import { CreateUserDto, UpdateUserDto } from '@src/validation/user.schema';
 import { eq } from 'drizzle-orm';
 import { UsersRepository } from './users.repository.interface';
-import { DatabaseException } from '../../exceptions/database.exception';
+import { DatabaseException } from '@src/exceptions/database.exception';
 
 @Injectable()
 export class UsersRepositoryImpl implements UsersRepository {

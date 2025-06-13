@@ -7,9 +7,9 @@ import {
   Logger,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
-import { DatabaseException } from './database.exception';
+import { DatabaseException } from '@src/exceptions/database.exception';
 import { ZodError } from 'zod';
-import { ZodValidationException } from './zod-validation.exception';
+import { ZodValidationException } from '@src/exceptions/zod-validation.exception';
 
 /**
  * Global exception filter that catches all exceptions

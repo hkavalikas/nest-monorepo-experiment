@@ -1,5 +1,5 @@
 import { Controller, Get, Inject } from '@nestjs/common';
-import { AppService } from './app.service';
+import { AppService } from '@src/app.service';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @Controller()

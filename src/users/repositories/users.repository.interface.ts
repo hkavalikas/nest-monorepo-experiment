@@ -1,5 +1,5 @@
-import { User } from '../../db';
-import { CreateUserDto, UpdateUserDto } from '../../validation/user.schema';
+import { User } from '@src/db';
+import { CreateUserDto, UpdateUserDto } from '@src/validation/user.schema';
 
 export interface UsersRepository {
   /**

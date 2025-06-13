@@ -1,8 +1,8 @@
 import 'source-map-support/register';
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import { AppModule } from '@src/app.module';
 import { patchNestJsSwagger, ZodValidationPipe } from 'nestjs-zod';
-import { AllExceptionsFilter } from './exceptions/all-exceptions.filter';
+import { AllExceptionsFilter } from '@src/exceptions/all-exceptions.filter';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {

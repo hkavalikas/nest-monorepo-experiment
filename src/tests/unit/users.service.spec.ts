@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { UsersService } from '../../users/users.service';
-import { CreateUserDto, UpdateUserDto } from '../../validation/user.schema';
+import { UsersService } from '@src/users/users.service';
+import { CreateUserDto, UpdateUserDto } from '@src/validation/user.schema';
 import { NotFoundException } from '@nestjs/common';
 
 describe('UsersService', () => {

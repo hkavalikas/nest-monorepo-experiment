@@ -1,8 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication } from '@nestjs/common';
+import { INestApplication, NotFoundException } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from '../../app.module';
 import { UsersRepository } from '../../users/repositories/users.repository.interface';
+import { ZodValidationPipe } from 'nestjs-zod';
 
 describe('UsersController (e2e)', () => {
   let app: INestApplication;
@@ -26,7 +27,8 @@ describe('UsersController (e2e)', () => {
         if (id === 'test-uuid') {
           return Promise.resolve(testUser);
         }
-        throw new Error(`User with ID ${id} not found`);
+        // Throw NotFoundException for non-existent user
+        throw new NotFoundException(`User with ID ${id} not found`);
       }),
       update: jest.fn().mockImplementation((id, updateDto) => {
         if (id === 'test-uuid') {
@@ -35,13 +37,15 @@ describe('UsersController (e2e)', () => {
             ...updateDto,
           });
         }
-        throw new Error(`User with ID ${id} not found`);
+        // Throw NotFoundException for non-existent user
+        throw new NotFoundException(`User with ID ${id} not found`);
       }),
       remove: jest.fn().mockImplementation((id) => {
         if (id === 'test-uuid') {
           return Promise.resolve(testUser);
         }
-        throw new Error(`User with ID ${id} not found`);
+        // Throw NotFoundException for non-existent user
+        throw new NotFoundException(`User with ID ${id} not found`);
       }),
     };
 
@@ -53,6 +57,8 @@ describe('UsersController (e2e)', () => {
       .compile();
 
     app = moduleFixture.createNestApplication();
+    // Explicitly apply ZodValidationPipe in test setup to ensure validation in e2e tests
+    app.useGlobalPipes(new ZodValidationPipe());
     await app.init();
   });
 

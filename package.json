@@ -11,7 +11,7 @@
     "format": "turbo run format --filter=client --filter=common",
     "lint": "turbo run lint --filter=client --filter=common",
     "dev": "dotenv -- turbo run dev:run",
-    "test": "dotenv -- turbo run test:unit:run",
+    "test": "dotenv -- turbo run test:unit:run && dotenv -- turbo run test:e2e:run",
     "test:unit": "dotenv -- turbo run test:unit:run",
     "test:e2e": "dotenv -- turbo run test:e2e:run",
     "build:app": "dotenv -- esbuild client/src/main.ts --bundle --platform=node --outfile=dist/main.js --sourcemap --sources-content=true --external:@nestjs/microservices --external:@nestjs/websockets --external:@nestjs/microservices/microservices-module --external:cache-manager --external:class-transformer --external:class-validator --external:@nestjs/microservices/microservices-module",

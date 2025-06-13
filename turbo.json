@@ -19,8 +19,7 @@
         "^build"
       ],
       "outputs": [
-        "client/dist/**",
-        "common/dist/**"
+        "dist/**"
       ]
     },
     "build:app": {

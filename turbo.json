@@ -19,7 +19,8 @@
         "^build"
       ],
       "outputs": [
-        "dist/**"
+        "client/dist/**",
+        "common/dist/**"
       ]
     },
     "build:app": {
@@ -37,9 +38,12 @@
         "^lint"
       ],
       "inputs": [
-        "client/src/**/*.ts",
-        "common/**/*.ts",
-        "src/**/*.ts",
+        "client/src/**/*",
+        "client/**/*.js",
+        "client/**/*.mjs",
+        "common/src/**/*",
+        "common/**/*.js",
+        "common/**/*.mjs",
         "eslint.config.mjs"
       ],
       "outputs": []
@@ -47,9 +51,12 @@
     "lint:run": {
       "cache": true,
       "inputs": [
-        "client/src/**/*.ts",
-        "common/**/*.ts",
-        "src/**/*.ts",
+        "client/src/**/*",
+        "client/**/*.js",
+        "client/**/*.mjs",
+        "common/src/**/*",
+        "common/**/*.js",
+        "common/**/*.mjs",
         "eslint.config.mjs"
       ],
       "outputs": []
@@ -57,14 +64,24 @@
     "format": {
       "cache": true,
       "inputs": [
-        "src/**/*.ts"
+        "client/src/**/*",
+        "common/src/**/*",
+        "client/**/*.js",
+        "common/**/*.js",
+        "client/**/*.mjs",
+        "common/**/*.mjs"
       ],
       "outputs": []
     },
     "format:run": {
       "cache": true,
       "inputs": [
-        "src/**/*.ts"
+        "client/src/**/*",
+        "common/src/**/*",
+        "client/**/*.js",
+        "common/**/*.js",
+        "client/**/*.mjs",
+        "common/**/*.mjs"
       ],
       "outputs": []
     },

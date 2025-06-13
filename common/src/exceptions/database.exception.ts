@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus } from '@nestjs/common';
+import { HttpException, HttpStatus } from "@nestjs/common";
 
 /**
  * Custom exception for database errors
@@ -10,14 +10,14 @@ export class DatabaseException extends HttpException {
     const errorResponse = {
       statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
       message,
-      error: 'Database Error',
+      error: "Database Error",
       details:
         error instanceof Error
           ? {
               name: error.name,
               message: error.message,
               stack:
-                process.env.NODE_ENV === 'production' ? undefined : error.stack,
+                process.env.NODE_ENV === "production" ? undefined : error.stack,
             }
           : String(error),
     };

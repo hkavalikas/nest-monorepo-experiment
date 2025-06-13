@@ -7,7 +7,7 @@
     "^.+\\.(t|j)s$": "ts-jest"
   },
   "moduleNameMapper": {
-    "^@client/(.*)$": "<rootDir>/../../client/src/$1",
-    "^@common/(.*)$": "<rootDir>/../../common/$1"
+    "^@client/(.*)$": "<rootDir>/../client/src/$1",
+    "^@common/(.*)$": "<rootDir>/../common/src/$1"
   }
 }

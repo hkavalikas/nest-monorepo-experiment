@@ -1,6 +1,6 @@
-import { HttpException, HttpStatus } from '@nestjs/common';
-import { ZodError } from 'zod';
-import { fromZodError } from 'zod-validation-error';
+import { HttpException, HttpStatus } from "@nestjs/common";
+import { ZodError } from "zod";
+import { fromZodError } from "zod-validation-error";
 
 /**
  * Custom exception for Zod validation errors
@@ -15,7 +15,7 @@ export class ZodValidationException extends HttpException {
     const errorResponse = {
       statusCode: HttpStatus.BAD_REQUEST,
       message: validationError.message,
-      error: 'Validation Error',
+      error: "Validation Error",
       details: error.errors.map((err) => ({
         code: err.code,
         path: err.path,

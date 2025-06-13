@@ -7,9 +7,9 @@
   "license": "UNLICENSED",
   "packageManager": "pnpm@8.6.5",
   "scripts": {
-    "build": "dotenv -- turbo run build:app",
-    "format": "dotenv -- turbo run format:run",
-    "lint": "dotenv -- turbo run lint:run",
+    "build": "turbo run build --filter=client --filter=common",
+    "format": "turbo run format --filter=client --filter=common",
+    "lint": "turbo run lint --filter=client --filter=common",
     "dev": "dotenv -- turbo run dev:run",
     "test": "dotenv -- turbo run test:unit:run",
     "test:unit": "dotenv -- turbo run test:unit:run",

@@ -1,12 +1,12 @@
-import { z } from 'zod';
-import { zodToOpenAPI } from 'nestjs-zod';
-import { SchemaObject } from '@nestjs/swagger/dist/interfaces/open-api-spec.interface';
+import { z } from "zod";
+import { zodToOpenAPI } from "nestjs-zod";
+import { SchemaObject } from "@nestjs/swagger/dist/interfaces/open-api-spec.interface";
 
 // Define a schema for user creation with descriptions and examples
 const createUserSchema = z.object({
-  name: z.string().min(2).max(100).describe('The name of the user'),
-  email: z.string().email().describe('The email of the user'),
-  password: z.string().min(8).max(100).describe('The password of the user'),
+  name: z.string().min(2).max(100).describe("The name of the user"),
+  email: z.string().email().describe("The email of the user"),
+  password: z.string().min(8).max(100).describe("The password of the user"),
 });
 
 // Define a schema for user update

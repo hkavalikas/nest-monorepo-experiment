@@ -1,15 +1,12 @@
 import 'source-map-support/register';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from '@client/app.module';
-import { patchNestJsSwagger, ZodValidationPipe } from 'nestjs-zod';
+import { patchNestJsSwagger } from 'nestjs-zod';
 import { AllExceptionsFilter } from '@common/exceptions/all-exceptions.filter';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-
-  // Enable validation globally
-  app.useGlobalPipes(new ZodValidationPipe());
 
   // Register global exception filter
   app.useGlobalFilters(new AllExceptionsFilter());

@@ -1,11 +1,11 @@
-import { drizzle } from "drizzle-orm/node-postgres";
-import { migrate } from "drizzle-orm/node-postgres/migrator";
-import { Pool } from "pg";
-import configuration from "./configuration";
+import { drizzle } from 'drizzle-orm/node-postgres';
+import { migrate } from 'drizzle-orm/node-postgres/migrator';
+import { Pool } from 'pg';
+import configuration from './configuration';
 
 // This script runs migrations on the database
 async function main() {
-  console.log("Running migrations...");
+  console.log('Running migrations...');
 
   let pool: Pool;
   try {
@@ -17,14 +17,14 @@ async function main() {
     const db = drizzle(pool);
 
     // This will run migrations from the specified directory
-    await migrate(db, { migrationsFolder: "drizzle" });
+    await migrate(db, { migrationsFolder: 'drizzle' });
 
-    console.log("Migrations completed successfully");
+    console.log('Migrations completed successfully');
 
     // Close the pool
     await pool.end();
   } catch (error) {
-    console.error("Migration failed:");
+    console.error('Migration failed:');
     console.error(error);
 
     // Try to close the pool if it exists
@@ -38,6 +38,6 @@ async function main() {
 }
 
 main().catch((err) => {
-  console.error("Unexpected error during migration:", err);
+  console.error('Unexpected error during migration:', err);
   process.exit(1);
 });

@@ -5,11 +5,11 @@ import {
   HttpException,
   HttpStatus,
   Logger,
-} from "@nestjs/common";
-import { Request, Response } from "express";
-import { DatabaseException } from "./database.exception";
-import { ZodError } from "zod";
-import { ZodValidationException } from "./zod-validation.exception";
+} from '@nestjs/common';
+import { Request, Response } from 'express';
+import { DatabaseException } from './database.exception';
+import { ZodError } from 'zod';
+import { ZodValidationException } from './zod-validation.exception';
 
 /**
  * Global exception filter that catches all exceptions
@@ -48,7 +48,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
       const exceptionResponse = exception.getResponse();
 
       response.status(status).json(
-        typeof exceptionResponse === "object"
+        typeof exceptionResponse === 'object'
           ? exceptionResponse
           : {
               statusCode: status,
@@ -62,7 +62,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
       // Handle unknown exceptions
       response.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
         statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
-        message: "Internal server error",
+        message: 'Internal server error',
         error: HttpStatus[HttpStatus.INTERNAL_SERVER_ERROR],
         timestamp: new Date().toISOString(),
         path: request.url,

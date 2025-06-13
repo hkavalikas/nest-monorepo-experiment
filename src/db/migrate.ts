@@ -1,6 +1,7 @@
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { migrate } from 'drizzle-orm/node-postgres/migrator';
 import { Pool } from 'pg';
+import configuration from '@src/config/configuration';
 
 // This script runs migrations on the database
 async function main() {
@@ -10,9 +11,7 @@ async function main() {
   try {
     // Create a PostgresSQL connection pool
     pool = new Pool({
-      connectionString:
-        process.env.DATABASE_URL ||
-        'postgres://postgres:postgres@localhost:5432/sample',
+      connectionString: configuration().databaseUrl,
     });
 
     const db = drizzle(pool);

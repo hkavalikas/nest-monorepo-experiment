@@ -73,7 +73,7 @@
       ],
       "inputs": [
         "src/**/*.ts",
-        "jest.config.js"
+        "jest.config.json"
       ],
       "outputs": [
         "coverage/**"

@@ -1,10 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UsersRepositoryImpl } from '@src/users/repositories/users.repository';
-import { USERS_REPOSITORY } from '@src/users/users.constants';
 import { NodePgDatabase } from 'drizzle-orm/node-postgres';
 import { NotFoundException } from '@nestjs/common';
 import { DatabaseException } from '@src/exceptions/database.exception';
 import { CreateUserDto } from '@src/validation/user.dto';
+import { DB_TOKEN } from '@src/db/db.module';
 
 const mockDb = {
   insert: jest.fn(),
@@ -21,7 +21,7 @@ describe('UsersRepositoryImpl', () => {
       providers: [
         UsersRepositoryImpl,
         {
-          provide: USERS_REPOSITORY,
+          provide: DB_TOKEN, // Use the imported DB_TOKEN symbol
           useValue: mockDb as unknown as NodePgDatabase,
         },
       ],

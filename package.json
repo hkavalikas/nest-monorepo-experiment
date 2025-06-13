@@ -19,7 +19,7 @@
     "lint:run": "dotenv -- eslint \"{src,apps,libs}/**/*.ts\" --fix",
     "start": "dotenv -- node --enable-source-maps dist/main.js",
     "dev:run": "dotenv -- tsx watch src/main.ts",
-    "test:unit:run": "dotenv -- jest",
+    "test:unit:run": "dotenv -- jest --config ./jest.config.json",
     "test:e2e:run": "dotenv -- jest --config ./src/tests/jest-e2e.json",
     "db:generate": "dotenv -- drizzle-kit generate",
     "db:migrate": "dotenv -- tsx src/db/migrate.ts",

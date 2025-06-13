@@ -105,10 +105,9 @@
       ],
       "inputs": [
         "client/src/**/*.ts",
-        "common/**/*.ts",
-        "src/**/*.ts",
+        "common/src/**/*.ts",
         "client/src/tests/unit/**/*.ts",
-        "src/tests/unit/**/*.ts"
+        "tests/unit/**/*.ts"
       ],
       "outputs": []
     },
@@ -116,10 +115,9 @@
       "cache": true,
       "inputs": [
         "client/src/**/*.ts",
-        "common/**/*.ts",
-        "src/**/*.ts",
+        "common/src/**/*.ts",
         "client/src/tests/unit/**/*.ts",
-        "src/tests/unit/**/*.ts"
+        "tests/unit/**/*.ts"
       ],
       "outputs": []
     },
@@ -129,18 +127,20 @@
         "build"
       ],
       "inputs": [
-        "src/**/*.ts",
-        "src/tests/jest-e2e.json",
-        "src/tests/e2e/**/*.ts"
+        "client/src/**/*.ts",
+        "common/src/**/*.ts",
+        "tests/jest-e2e.json",
+        "tests/integration/**/*.ts"
       ],
       "outputs": []
     },
     "test:e2e:run": {
       "cache": true,
       "inputs": [
-        "src/**/*.ts",
-        "src/tests/jest-e2e.json",
-        "src/tests/e2e/**/*.ts"
+        "client/src/**/*.ts",
+        "common/src/**/*.ts",
+        "tests/jest-e2e.json",
+        "tests/integration/**/*.ts"
       ],
       "outputs": []
     }

@@ -7,7 +7,7 @@ import {
   UpdateUserDto,
 } from '@client/users/validation/user.dto';
 import { eq } from 'drizzle-orm';
-import { UsersRepository } from './users.repository.interface';
+import { UsersRepository } from '@client/users/repositories/users.repository.interface';
 import { DatabaseException } from '@common/exceptions/database.exception';
 
 @Injectable()

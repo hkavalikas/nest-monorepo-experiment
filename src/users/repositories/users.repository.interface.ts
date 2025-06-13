@@ -1,5 +1,5 @@
 import { User } from '@src/db';
-import { CreateUserDto, UpdateUserDto } from '@src/validation/user.dto';
+import { CreateUserDto, UpdateUserDto } from '@src/users/validation/user.dto';
 
 export interface UsersRepository {
   /**

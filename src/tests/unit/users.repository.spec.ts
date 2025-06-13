@@ -3,7 +3,7 @@ import { UsersRepositoryImpl } from '@src/users/repositories/users.repository';
 import { NodePgDatabase } from 'drizzle-orm/node-postgres';
 import { NotFoundException } from '@nestjs/common';
 import { DatabaseException } from '@src/exceptions/database.exception';
-import { CreateUserDto } from '@src/validation/user.dto';
+import { CreateUserDto } from '@src/users/validation/user.dto';
 import { DB_TOKEN } from '@src/db/db.module';
 
 const mockDb = {

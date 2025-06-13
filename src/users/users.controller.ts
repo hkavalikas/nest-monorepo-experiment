@@ -9,11 +9,11 @@ import {
   Post,
 } from '@nestjs/common';
 import { UsersService } from '@src/users/users.service';
-import { CreateUserDto, UpdateUserDto } from '@src/validation/user.dto';
+import { CreateUserDto, UpdateUserDto } from '@src/users/validation/user.dto';
 import {
   createUserOpenApi,
   updateUserOpenApi,
-} from '@src/validation/user.schema';
+} from '@src/users/validation/user.schema';
 import { ApiBody, ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
 
 @Controller('users')

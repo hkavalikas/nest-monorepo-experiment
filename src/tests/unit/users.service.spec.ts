@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UsersService } from '@src/users/users.service';
-import { CreateUserDto, UpdateUserDto } from '@src/validation/user.dto';
+import { CreateUserDto, UpdateUserDto } from '@src/users/validation/user.dto';
 import { NotFoundException } from '@nestjs/common';
 import { USERS_REPOSITORY } from '@src/users/users.constants';
 

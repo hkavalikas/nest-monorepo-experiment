@@ -1,81 +1,36 @@
+# NestJS Monorepo Experiment
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A modern, monorepo-style NestJS starter with TypeScript, Drizzle ORM, Zod validation, and fast builds.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Features
 
-## Description
+- **NestJS** for scalable server-side applications
+- **pnpm** for fast, efficient package management
+- **Drizzle ORM** for type-safe database access and migrations
+- **Zod** for schema validation
+- **esbuild** for lightning-fast builds
+- **dotenv-cli** for environment variable management
+- **Turbo** for orchestrating tasks and tests
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository with:
+## Getting Started
 
-- [pnpm](https://pnpm.io/) for package management
-- [zod](https://zod.dev/) for validation
-- [drizzle](https://orm.drizzle.team/) for ORM and schema migrations
-- [esbuild](https://esbuild.github.io/) for building
-
-## Project setup
+### 1. Install dependencies
 
 ```bash
-# Install pnpm if you don't have it
-$ npm install -g pnpm
+# Install pnpm globally if you don't have it
+npm install -g pnpm
 
-# Install dependencies
-$ pnpm install
+# Install project dependencies
+pnpm install
 ```
 
-## Database setup
+### 2. Environment Variables
 
-Before running any database operations, make sure the PostgreSQL Docker container is running:
-
-```bash
-# Start the PostgreSQL container
-$ pnpm docker:up
-```
-
-Then you can:
-
-```bash
-# Generate migrations based on your schema
-$ pnpm db:generate
-
-# Run migrations
-$ pnpm db:migrate
-
-```
-
-The PostgreSQL database will be available at:
-- Host: localhost
-- Port: 5432
-- Username: postgres
-- Password: postgres
-- Database: sample
-
-You can connect to it using any PostgreSQL client or use the built-in Drizzle Studio:
-
-```bash
-$ pnpm db:studio
-```
-
-### Environment Variables
-
-The project uses the following environment variables that can be configured in the `.env` file:
+Create a `.env` file in the project root. Example:
 
 ```
 DATABASE_URL=postgres://postgres:postgres@localhost:5432/sample
@@ -83,69 +38,79 @@ PORT=3000
 NODE_ENV=development
 ```
 
-## Compile and run the project
+All scripts automatically load variables from `.env` via dotenv-cli.
+
+### 3. Database Setup
+
+Start your PostgreSQL instance (e.g., via Docker):
 
 ```bash
-# development
-$ pnpm start
+# Example: using Docker Compose (if you have a docker-compose.yml)
+docker-compose up -d
 ```
 
-## Run tests
+Generate and run migrations:
 
 ```bash
-# run all tests (unit and e2e) with turbo for faster execution
-$ pnpm test
-
-# run only unit tests
-$ pnpm test:unit
-
-# run only e2e tests
-$ pnpm test:e2e
+pnpm db:generate
+pnpm db:migrate
 ```
 
-All tests are now located in the `src/tests` directory:
-- Unit tests: `src/tests/unit/*.spec.ts`
-- Integration tests: `src/tests/integration/*.e2e-spec.ts`
+### 4. Build and Run
 
-The tests use turbo for faster execution with caching.
+```bash
+# Build the project
+pnpm build
 
-## Project Features
+# Start the application
+pnpm start
 
-### Validation with nestjs-zod
-
-This project uses [nestjs-zod](https://github.com/BenLorantfy/nestjs-zod) for validation, which integrates [Zod](https://zod.dev/) with NestJS. Zod schemas are defined in the `src/validation` directory and used to create DTO classes.
-
-Example usage:
-
-```typescript
-// Define a schema
-const userSchema = z.object({
-  name: z.string().min(2),
-  email: z.string().email(),
-});
-
-// Create a DTO class from the schema
-export class UserDto extends createZodDto(userSchema) {}
-
-// Use it in a controller
-@Post()
-create(@Body() createUserDto: UserDto) {
-  // createUserDto is now validated and typed
-}
+# For development with hot-reload
+pnpm dev
 ```
 
-The validation is handled automatically by the global ZodValidationPipe, which is configured in `main.ts`.
+### 5. Code Quality
 
-### Database with Drizzle ORM
+```bash
+# Format code
+pnpm format
 
-This project uses [Drizzle ORM](https://orm.drizzle.team/) for database access and migrations. The database schema is defined in `src/db/schema.ts`.
-
-Example usage:
-
-```typescript
-// Query the database
-const users = await db.select().from(usersTable);
-
-// Insert data
-const newUser = await db.insert(usersTable).values({ name: 'John', email: 'john@example.com' }).returning();
+# Lint code
+pnpm lint
 ```
+
+### 6. Testing
+
+```bash
+# Run all tests (unit and e2e)
+pnpm test
+
+# Run only unit tests
+pnpm test:unit
+
+# Run only e2e tests
+pnpm test:e2e
+```
+
+## Scripts Reference
+
+- `pnpm build` – Build the project using esbuild
+- `pnpm start` – Start the compiled app
+- `pnpm dev` – Start in development mode with hot-reload
+- `pnpm db:generate` – Generate Drizzle migrations
+- `pnpm db:migrate` – Run database migrations
+- `pnpm format` – Format code with Prettier
+- `pnpm lint` – Lint code with ESLint
+- `pnpm test` – Run all tests
+- `pnpm test:unit` – Run unit tests
+- `pnpm test:e2e` – Run end-to-end tests
+
+## Project Structure
+
+- `src/` – Application source code
+- `src/db/` – Database schema and migration scripts
+- `src/users/` – Example user module
+- `src/validation/` – Zod schemas
+- `drizzle/` – Drizzle migration files
+
+---

@@ -1,50 +1,41 @@
-# Testing
+# Tests Directory
 
-This project uses Jest for both unit and end-to-end (integration) testing. All test files are located in the `src/tests` directory.
+This directory contains all unit and integration (e2e) tests for the monorepo.
 
-## Directory Structure
+## Structure
 
 ```
-src/tests/
-├── unit/                  # Unit tests (e.g., app.controller.spec.ts, users.controller.spec.ts, users.service.spec.ts)
-├── integration/           # End-to-end (e2e) tests (e.g., app.e2e-spec.ts, users.e2e-spec.ts)
-├── jest-e2e.json          # Jest configuration for e2e tests
-└── README.md              # This file
+tests/
+  unit/           # Unit tests for client and common code
+    *.spec.ts
+  integration/    # End-to-end (e2e) tests for the application
+    *.e2e-spec.ts
+  jest-e2e.json   # Jest config for e2e tests
+  README.md       # (this file)
 ```
 
-## Unit Tests
+## Running Tests
 
-Unit tests are located in `src/tests/unit` and have a `.spec.ts` extension.
+From the root of the repository:
 
-To run unit tests:
+- **Unit tests:**
+  ```sh
+  pnpm test
+  ```
+  - Runs all unit tests in `tests/unit` using the root Jest config.
 
-```bash
-pnpm test:unit
-```
+- **E2E tests:**
+  ```sh
+  pnpm test:e2e
+  ```
+  - Runs all integration tests in `tests/integration` using `tests/jest-e2e.json`.
 
-This will run all files matching the pattern `src/tests/unit/*.spec.ts`.
-
-## End-to-End (Integration) Tests
-
-End-to-end tests are located in `src/tests/integration` and have a `.e2e-spec.ts` extension.
-
-To run e2e tests:
-
-```bash
-pnpm test:e2e
-```
-
-This will run all files matching the pattern `src/tests/integration/*.e2e-spec.ts`.
-
-## Running All Tests
-
-To run all tests (unit and e2e):
-
-```bash
-pnpm test
-```
+## Test Aliases
+- Use `@client/*` to import from the client package (e.g., `@client/app.module`).
+- Use `@common/*` to import from the common package (e.g., `@common/db`).
+- These aliases are configured in the Jest configs for both unit and e2e tests.
 
 ## Notes
-
-- All test scripts automatically load environment variables from your `.env` file via `dotenv-cli`.
-- Test scripts are defined in `package.json` and orchestrated with Turbo for fast execution.
+- All tests are run from the root using pnpm and TurboRepo.
+- You can add new test files to `tests/unit` or `tests/integration` as needed.
+- If you add new aliases or move files, update the Jest config accordingly.

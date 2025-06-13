@@ -92,6 +92,57 @@ pnpm test:unit
 pnpm test:e2e
 ```
 
+## Quick Start
+
+```bash
+pnpm install
+pnpm dev
+```
+
+## Centralized Configuration
+
+- Uses [`@nestjs/config`](https://docs.nestjs.com/techniques/configuration) for environment variables and configuration. See `src/config/configuration.ts`.
+
+## Running Tests
+
+- **Unit tests:**
+  ```bash
+  pnpm test:unit
+  ```
+- **E2E tests:**
+  ```bash
+  pnpm test:e2e
+  ```
+
+## Linting & Formatting
+
+- Lint and format your code with:
+  ```bash
+  pnpm lint
+  pnpm format
+  ```
+- (Recommended) Set up a pre-commit hook with [husky](https://typicode.github.io/husky/) and [lint-staged](https://github.com/okonet/lint-staged):
+  ```bash
+  pnpm add -D husky lint-staged
+  npx husky install
+  npx husky add .husky/pre-commit "npx lint-staged"
+  ```
+  Add to your `package.json`:
+  ```json
+  "lint-staged": {
+    "*.{js,ts,json,md}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  }
+  ```
+
+## Contributing
+
+- Follow the code style enforced by ESLint and Prettier.
+- Use the `@src` alias for all internal imports.
+- Write unit and e2e tests for new features.
+
 ## Scripts Reference
 
 - `pnpm build` – Build the project using esbuild
@@ -107,10 +158,14 @@ pnpm test:e2e
 
 ## Project Structure
 
-- `src/` – Application source code
-- `src/db/` – Database schema and migration scripts
-- `src/users/` – Example user module
-- `src/validation/` – Zod schemas
-- `drizzle/` – Drizzle migration files
+- `src/` — Main source code
+- `src/db/` — Database connection, schema, and module
+- `src/users/` — User module (controller, service, repository)
+- `src/validation/` — DTOs and Zod schemas
+- `src/exceptions/` — Custom exception filters and classes
+- `src/config/` — Centralized configuration
+- `src/tests/` — Unit and integration tests
 
 ---
+
+For more details, see the comments in each file and the [NestJS documentation](https://docs.nestjs.com/).

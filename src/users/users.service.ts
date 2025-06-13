@@ -1,12 +1,13 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { User } from '@src/db';
-import { CreateUserDto, UpdateUserDto } from '@src/validation/user.schema';
+import { CreateUserDto, UpdateUserDto } from '@src/validation/user.dto';
 import { UsersRepository } from '@src/users/repositories/users.repository.interface';
+import { USERS_REPOSITORY } from '@src/users/users.constants';
 
 @Injectable()
 export class UsersService {
   constructor(
-    @Inject('USERS_REPOSITORY')
+    @Inject(USERS_REPOSITORY)
     private usersRepository: UsersRepository,
   ) {}
 

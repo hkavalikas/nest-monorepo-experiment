@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { createZodDto, zodToOpenAPI } from 'nestjs-zod';
+import { zodToOpenAPI } from 'nestjs-zod';
 import { SchemaObject } from '@nestjs/swagger/dist/interfaces/open-api-spec.interface';
 
 // Define a schema for user creation with descriptions and examples
@@ -12,11 +12,6 @@ const createUserSchema = z.object({
 // Define a schema for user update
 const updateUserSchema = createUserSchema.partial();
 
-// Create DTO classes from the schemas
-class CreateUserDto extends createZodDto(createUserSchema) {}
-
-class UpdateUserDto extends createZodDto(updateUserSchema) {}
-
 // Generate OpenAPI schemas from Zod schemas
 const createUserOpenApi: SchemaObject = zodToOpenAPI(createUserSchema);
 const updateUserOpenApi: SchemaObject = zodToOpenAPI(updateUserSchema);
@@ -24,8 +19,6 @@ const updateUserOpenApi: SchemaObject = zodToOpenAPI(updateUserSchema);
 export {
   createUserSchema,
   updateUserSchema,
-  CreateUserDto,
-  UpdateUserDto,
   createUserOpenApi,
   updateUserOpenApi,
 };

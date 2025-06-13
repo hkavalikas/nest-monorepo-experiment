@@ -1,7 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UsersService } from '@src/users/users.service';
-import { CreateUserDto, UpdateUserDto } from '@src/validation/user.schema';
+import { CreateUserDto, UpdateUserDto } from '@src/validation/user.dto';
 import { NotFoundException } from '@nestjs/common';
+import { USERS_REPOSITORY } from '@src/users/users.constants';
 
 describe('UsersService', () => {
   let service: UsersService;
@@ -19,7 +20,7 @@ describe('UsersService', () => {
       providers: [
         UsersService,
         {
-          provide: 'USERS_REPOSITORY',
+          provide: USERS_REPOSITORY,
           useValue: mockUsersRepository,
         },
       ],

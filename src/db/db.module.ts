@@ -2,7 +2,7 @@ import { Global, Module } from '@nestjs/common';
 import { db } from '@src/db';
 
 // Provider token for the database
-export const DB_TOKEN = 'DB_TOKEN';
+export const DB_TOKEN = Symbol('DB_TOKEN');
 
 @Global()
 @Module({

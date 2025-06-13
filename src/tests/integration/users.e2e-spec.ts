@@ -4,6 +4,7 @@ import * as request from 'supertest';
 import { AppModule } from '@src/app.module';
 import { UsersRepository } from '@src/users/repositories/users.repository.interface';
 import { ZodValidationPipe } from 'nestjs-zod';
+import { USERS_REPOSITORY } from '@src/users/users.constants';
 
 describe('UsersController (e2e)', () => {
   let app: INestApplication;
@@ -52,7 +53,7 @@ describe('UsersController (e2e)', () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
     })
-      .overrideProvider('USERS_REPOSITORY')
+      .overrideProvider(USERS_REPOSITORY)
       .useValue(mockUsersRepository)
       .compile();
 

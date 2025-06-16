@@ -25,14 +25,6 @@ export class ErrorHandler implements ExceptionFilter {
       // Format and send the response
       const formattedResponse = formatExceptionResponse(exception);
 
-      if (formattedResponse.body.headers) {
-        Object.entries(formattedResponse.body.headers).forEach(
-          ([key, value]) => {
-            response.setHeader(key, value);
-          },
-        );
-      }
-
       response.status(formattedResponse.status).json({
         ...formattedResponse.body,
         path: request.url,
@@ -66,7 +58,6 @@ export interface FormattedExceptionResponse {
     message: string;
     code: string;
     hint: string | null;
-    headers: Record<string, string>;
   };
 }
 
@@ -77,14 +68,12 @@ export function formatExceptionResponse(
   let message: string;
   let code: string;
   let hint: string | null = null;
-  let headers: Record<string, string> = {};
 
   if (exception instanceof ApplicationError) {
     status = exception.status;
     message = exception.message;
     code = exception.code;
     hint = exception.hint;
-    headers = exception.buildHeaders();
   } else if (
     isValidationErrorLike(exception) ||
     (exception as Error).name.includes('ZodError')
@@ -110,7 +99,6 @@ export function formatExceptionResponse(
       message,
       code,
       hint,
-      headers,
     },
   };
 }

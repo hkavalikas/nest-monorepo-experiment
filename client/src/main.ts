@@ -8,6 +8,7 @@ import { ErrorHandler } from '@common/filters/error-handler';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.setGlobalPrefix('api');
 
   app.useGlobalFilters(new ErrorHandler());
 

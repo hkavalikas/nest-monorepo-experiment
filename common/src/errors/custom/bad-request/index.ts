@@ -18,6 +18,7 @@ export class ExampleCustomBadRequest extends BadRequest {
     super({
       message: `Example custom bad request error`,
       code: 'BR_E_EXAMPLE_CUSTOM_BAD_REQUEST',
+      hint: 'This is an example of a custom bad request error',
     });
   }
 }

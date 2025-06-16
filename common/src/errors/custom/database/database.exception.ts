@@ -11,7 +11,11 @@ export default class DatabaseException extends ApplicationError {
     super({
       code: code || 'APP_E_DATABASE_ERROR',
       message: message || 'Database Error',
-      hint: hint || null,
+      hint:
+        hint ??
+        (error != null && typeof error === 'object' && 'detail' in error
+          ? (error as { detail: string }).detail
+          : null),
       status: 500,
     });
 

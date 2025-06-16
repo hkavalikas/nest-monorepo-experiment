@@ -35,8 +35,4 @@ export default class ApplicationError extends Error {
     }
     delete this.stack;
   }
-
-  public buildHeaders(): Record<string, string> {
-    return {};
-  }
 }

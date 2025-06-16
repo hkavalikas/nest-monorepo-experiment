@@ -2,7 +2,7 @@ import 'source-map-support/register';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from '@client/app.module';
 import { patchNestJsSwagger } from 'nestjs-zod';
-import { AllExceptionsFilter } from '@common/exceptions/all-exceptions.filter';
+import { AllExceptionsFilter } from '@common/errors/filters/all-exceptions.filter';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { env } from '@common/env';
 

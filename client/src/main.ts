@@ -4,6 +4,7 @@ import { AppModule } from '@client/app.module';
 import { patchNestJsSwagger } from 'nestjs-zod';
 import { AllExceptionsFilter } from '@common/exceptions/all-exceptions.filter';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { env } from '@common/env';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -16,14 +17,14 @@ async function bootstrap() {
 
   // Set up Swagger documentation
   const config = new DocumentBuilder()
-    .setTitle('Sample Swagger Doc')
+    .setTitle('Swagger Doc')
     .setDescription("Let's see if it works")
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/docs', app, document);
 
-  await app.listen(process.env.PORT ?? 3000);
+  await app.listen(env.PORT);
 }
 bootstrap().catch((err) => {
   console.error('Failed to start application:', err);

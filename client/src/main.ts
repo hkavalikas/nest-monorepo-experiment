@@ -2,15 +2,15 @@ import 'source-map-support/register';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from '@client/app.module';
 import { patchNestJsSwagger } from 'nestjs-zod';
-import { AllExceptionsFilter } from '@common/errors/filters/all-exceptions.filter';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { env } from '@common/env';
+import { ErrorHandler } from '@common/middleware/error-handler';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // Register global exception filter
-  app.useGlobalFilters(new AllExceptionsFilter());
+  // Register middleware
+  app.use(new ErrorHandler());
 
   // Patch NestJS Swagger to work with Zod schemas
   patchNestJsSwagger();

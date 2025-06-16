@@ -17,7 +17,7 @@ async function main() {
     const db = drizzle(pool);
 
     // This will run migrations from the specified directory
-    await migrate(db, { migrationsFolder: 'drizzle' });
+    await migrate(db, { migrationsFolder: 'common/src/db/drizzle' });
 
     console.log('Migrations completed successfully');
 

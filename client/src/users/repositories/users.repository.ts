@@ -7,7 +7,7 @@ import {
 } from '@client/users/validation/user.dto';
 import { eq } from 'drizzle-orm';
 import { UsersRepository } from '@client/users/repositories/users.repository.interface';
-import { DatabaseException } from '@common/exceptions/database.exception';
+import DatabaseException from '@common/errors/custom/database/database.exception';
 import { env } from '@common/env';
 
 @Injectable()
@@ -30,7 +30,7 @@ export class UsersRepositoryImpl implements UsersRepository {
         .returning();
       return user;
     } catch (error: unknown) {
-      throw new DatabaseException(`Failed to create user`, error);
+      throw new DatabaseException(`Failed to create user`, { error });
     }
   }
 
@@ -42,7 +42,7 @@ export class UsersRepositoryImpl implements UsersRepository {
     try {
       return await this.db.select().from(users);
     } catch (error: unknown) {
-      throw new DatabaseException(`Failed to find users`, error);
+      throw new DatabaseException(`Failed to find users`, { error });
     }
   }
 
@@ -63,7 +63,9 @@ export class UsersRepositoryImpl implements UsersRepository {
       if (error instanceof NotFoundException) {
         throw error;
       }
-      throw new DatabaseException(`Failed to find user with ID ${id}`, error);
+      throw new DatabaseException(`Failed to find user with ID ${id}`, {
+        error,
+      });
     }
   }
 
@@ -91,7 +93,9 @@ export class UsersRepositoryImpl implements UsersRepository {
       if (error instanceof NotFoundException) {
         throw error;
       }
-      throw new DatabaseException(`Failed to update user with ID ${id}`, error);
+      throw new DatabaseException(`Failed to update user with ID ${id}`, {
+        error,
+      });
     }
   }
 
@@ -117,7 +121,9 @@ export class UsersRepositoryImpl implements UsersRepository {
       if (error instanceof NotFoundException) {
         throw error;
       }
-      throw new DatabaseException(`Failed to remove user with ID ${id}`, error);
+      throw new DatabaseException(`Failed to remove user with ID ${id}`, {
+        error,
+      });
     }
   }
 }

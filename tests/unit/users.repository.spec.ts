@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { UsersRepositoryImpl } from '@client/users/repositories/users.repository';
 import { NodePgDatabase } from 'drizzle-orm/node-postgres';
 import { NotFoundException } from '@nestjs/common';
-import { DatabaseException } from '@common/exceptions/database.exception';
+import DatabaseException from '@common/errors/custom/database/database.exception';
 import { CreateUserDto } from '@client/users/validation/user.dto';
 import { env } from '@common/env';
 

@@ -4,13 +4,12 @@ import { AppModule } from '@client/app.module';
 import { patchNestJsSwagger } from 'nestjs-zod';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { env } from '@common/env';
-import { ErrorHandler } from '@common/middleware/error-handler';
+import { ErrorHandler } from '@common/filters/error-handler';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // Register middleware
-  app.use(new ErrorHandler());
+  app.useGlobalFilters(new ErrorHandler());
 
   // Patch NestJS Swagger to work with Zod schemas
   patchNestJsSwagger();

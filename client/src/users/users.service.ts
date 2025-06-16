@@ -5,12 +5,12 @@ import {
   UpdateUserDto,
 } from '@client/users/validation/user.dto';
 import { UsersRepository } from '@client/users/repositories/users.repository.interface';
-import { USERS_REPOSITORY } from '@client/users/users.constants';
+import { env } from '@common/env';
 
 @Injectable()
 export class UsersService {
   constructor(
-    @Inject(USERS_REPOSITORY)
+    @Inject(env.USERS_REPOSITORY)
     private usersRepository: UsersRepository,
   ) {}
 

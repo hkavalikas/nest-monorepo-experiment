@@ -5,7 +5,7 @@ import {
   UpdateUserDto,
 } from '@client/users/validation/user.dto';
 import { NotFoundException } from '@nestjs/common';
-import { USERS_REPOSITORY } from '@client/users/users.constants';
+import { env } from '@common/env';
 
 describe('UsersService', () => {
   let service: UsersService;
@@ -23,7 +23,7 @@ describe('UsersService', () => {
       providers: [
         UsersService,
         {
-          provide: USERS_REPOSITORY,
+          provide: env.USERS_REPOSITORY,
           useValue: mockUsersRepository,
         },
       ],
